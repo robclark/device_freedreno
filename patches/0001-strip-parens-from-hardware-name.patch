@@ -1,0 +1,28 @@
+From 9681048e7288632662f6df7d70b647f051cc59d4 Mon Sep 17 00:00:00 2001
+From: Varad Gautam <varadgautam@gmail.com>
+Date: Sat, 19 Sep 2015 13:17:09 -0400
+Subject: [PATCH] strip parens from hardware name
+
+So we end up w/ ro.hardware equal to "qualcomm" instead of
+"qualcomm(flatteneddevicetree)" (with parens that makes all hell
+break loose
+---
+ init/util.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/init/util.c b/init/util.c
+index d25cefd..d0291d8 100644
+--- a/init/util.c
++++ b/init/util.c
+@@ -466,7 +466,7 @@ void get_hardware_name(char *hardware, unsigned int *revision)
+         if (x) {
+             x += 2;
+             n = 0;
+-            while (*x && *x != '\n') {
++            while (*x && *x != '\n' && *x != '(') {
+                 if (!isspace(*x))
+                     hardware[n++] = tolower(*x);
+                 x++;
+-- 
+2.1.0
+
