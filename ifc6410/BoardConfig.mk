@@ -16,6 +16,8 @@ TARGET_CPU_VARIANT := krait
 #SMALLER_FONT_FOOTPRINT := true
 #MINIMAL_FONT_FOOTPRINT := true
 
+WITH_DEXPREOPT := true
+
 # Some framework code requires this to enable BT
 # For now:
 BOARD_HAVE_BLUETOOTH := false
