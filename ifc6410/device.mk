@@ -26,6 +26,11 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 
 PRODUCT_COPY_FILES := \
 	$(foreach f,$(wildcard $(LOCAL_PATH)/root/*),$(f):$(subst $(LOCAL_PATH)/,,$(f))) \
+	$(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml \
+	$(LOCAL_PATH)/media_profiles.xml:system/etc/media_profiles.xml \
+	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+	frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
+	frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
 	$(LOCAL_PATH)/bootimg.cfg:bootimg.cfg \
 	$(LOCAL_KERNEL):kernel
 
@@ -34,6 +39,10 @@ PRODUCT_COPY_FILES := \
 PRODUCT_COPY_FILES += \
 	$(ADRENO_FIRMWARE)/a300_pfp.fw:root/lib/firmware/a300_pfp.fw \
 	$(ADRENO_FIRMWARE)/a300_pm4.fw:root/lib/firmware/a300_pm4.fw \
+
+# Need AppWidget permission to prevent from Launcher's crash.
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/android.software.app_widgets.xml:system/etc/permissions/android.software.app_widgets.xml
 
 $(call inherit-product-if-exists, vendor/freedreno/ifc6410/device-vendor.mk)
 
